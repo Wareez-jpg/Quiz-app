@@ -1,8 +1,11 @@
-# Quiz App
+# NOVA Quiz App
 
 ## Live Demo: https://wareez-jpg.github.io/Quiz-app/
 
-A science quiz app built with JavaScript using the Open Trivia Database API.
+
+An interactive quiz game built with **HTML, CSS and JavaScript** that fetches real-time multiple-choice questions from the Open Trivia Database API.
+
+Designed with a game-inspired interface, NOVA Quiz combines learning with an engaging user experience through animated backgrounds, timers, score tracking, and smooth gameplay.
 
 ## What I built
 - Fetches random science questions from an external API
@@ -14,3 +17,25 @@ A science quiz app built with JavaScript using the Open Trivia Database API.
 ## Built with
 - HTML, CSS, JavaScript
 - Open Trivia Database API (opentdb.com)
+
+
+## Upcoming Features
+
+- Redesigned landing page
+- Progress bar
+- Multiple quiz subjects
+- Difficulty selection
+- Sound effects
+- Background music
+- High score saving using Local Storage
+- Achievements and streak tracking
+
+## Author
+
+**Wareez Bamigboye**
+
+GitHub: https://github.com/wareez-jpg
+
+---
+
+If you enjoyed this project, consider giving it a star!

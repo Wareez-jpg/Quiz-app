@@ -1,49 +1,57 @@
+console.log("script loaded");
 let timeLeft = 20;
 let timer;
 let score = 0;
 let currentQuestion = 0;
-let questionsArray = []
+let questionsArray = [];
 
 const questionNumber = document.getElementById("question-number");
 const timerDisplay = document.getElementById("timer");
 
+function startQuiz() {
+    console.log("startQuiz running");
+    
+    score = 0;
+    currentQuestion = 0;
 
-fetch ('https://opentdb.com/api.php?amount=10&category=17&type=multiple')
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        questionsArray = data.results
-        showQuestion(questionsArray[0])
-    })
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('score-container').style.display = 'none';
+
+    fetch('https://opentdb.com/api.php?amount=10&category=17&type=multiple')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            questionsArray = data.results;
+            showQuestion(questionsArray[0]);
+        });
+}
 
 function startTimer() {
-//#endregion#
-//#endregion#
-//#endregion#
     clearInterval(timer);
-    timeLeft = 20
+    timeLeft = 20;
     timerDisplay.textContent = `${timeLeft}s`;
     timer = setInterval(function() {
         timeLeft--;
         timerDisplay.textContent = `${timeLeft}s`;
-        if(timeLeft <= 0) {
+        if (timeLeft <= 0) {
             clearInterval(timer);
             nextQuestion();
         }
-    },1000);
+    }, 1000);
 }
 
 function showQuestion(question) {
     questionNumber.textContent =
-    `Question ${currentQuestion + 1} of ${questionsArray.length}`;
+        `Question ${currentQuestion + 1} of ${questionsArray.length}`;
 
     startTimer();
 
     document.getElementById('question').textContent = question.question;
 
     const allAnswers = [...question.incorrect_answers, question.correct_answer].sort(function() {
-        return Math.random() - 0.5
+        return Math.random() - 0.5;
     });
 
     const answerButtonsContainer = document.getElementById('answer-buttons');
@@ -64,12 +72,13 @@ function showQuestion(question) {
     newButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             clearInterval(timer);
+
             const correct = question.correct_answer;
             newButtons.forEach(function(btn) {
                 btn.disabled = true;
                 if (btn.textContent === correct) {
                     btn.style.backgroundColor = 'green';
-            }
+                }
             });
 
             if (button.textContent !== correct) {
@@ -77,8 +86,8 @@ function showQuestion(question) {
             } else {
                 score++;
             }
-        })
-    })
+        });
+    });
 }
 
 function nextQuestion() {
@@ -86,14 +95,21 @@ function nextQuestion() {
     if (currentQuestion < questionsArray.length) {
         showQuestion(questionsArray[currentQuestion]);
     } else {
-        document.getElementById('quiz-container').style.display = 'none'
-        document.getElementById('score-container').style.display = 'block'
-        document.getElementById('score-text').textContent = 
-        'you scored' + score + 'out of' + questionsArray.length;
+        document.getElementById('quiz-container').style.display = 'none';
+        document.getElementById('score-container').style.display = 'block';
+        document.getElementById('score-text').textContent =
+            'You scored ' + score + ' out of ' + questionsArray.length;
     }
 }
 
 document.getElementById('next-btn').addEventListener('click', function() {
     clearInterval(timer);
     nextQuestion();
-})
+});
+
+console.log(document.getElementById("start-btn"));
+document.getElementById('start-btn').addEventListener('click', function () {
+    console.log("Start button clicked");
+    startQuiz();
+});
+document.getElementById('restart-btn').addEventListener('click', startQuiz);
