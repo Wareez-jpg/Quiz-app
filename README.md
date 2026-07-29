@@ -17,6 +17,7 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 ## Built with
 - HTML, CSS, JavaScript
 - Open Trivia Database API (opentdb.com)
+<<<<<<< HEAD
 
 
 ## Upcoming Features
@@ -39,3 +40,5 @@ GitHub: https://github.com/wareez-jpg
 ---
 
 If you enjoyed this project, consider giving it a star!
+=======
+>>>>>>> db04a78ce91a626d5928398a6098cda498c84365
