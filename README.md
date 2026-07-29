@@ -1,6 +1,6 @@
 # Quiz App
 
-## Live Demo: https://wareez-jpg.github.io/quiz-app/
+## Live Demo: https://wareez-jpg.github.io/Quiz-app/
 
 A science quiz app built with JavaScript using the Open Trivia Database API.
 
