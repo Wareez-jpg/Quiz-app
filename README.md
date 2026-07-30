@@ -13,6 +13,8 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 - Checks answers and highlights correct/incorrect
 - Tracks score and displays final result
 - Next button progresses through questions
+- Difficulty selection
+- Multiple quiz subjects
 
 ## Built with
 - HTML, CSS, JavaScript
@@ -22,10 +24,7 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 
 ## Upcoming Features
 
-- Redesigned landing page
 - Progress bar
-- Multiple quiz subjects
-- Difficulty selection
 - Sound effects
 - Background music
 - High score saving using Local Storage
