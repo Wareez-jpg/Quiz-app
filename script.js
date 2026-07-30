@@ -4,6 +4,9 @@ let timer;
 let score = 0;
 let currentQuestion = 0;
 let questionsArray = [];
+let selectedCategory = 17;
+let selectedDifficulty = "easy";
+let questionAmount = 10
 
 const questionNumber = document.getElementById("question-number");
 const timerDisplay = document.getElementById("timer");
@@ -18,12 +21,21 @@ function startQuiz() {
     document.getElementById('quiz-container').style.display = 'block';
     document.getElementById('score-container').style.display = 'none';
 
-    fetch('https://opentdb.com/api.php?amount=10&category=17&type=multiple')
+    selectedCategory = document.getElementById("subject").value;
+    selectedDifficulty = document.getElementById("difficulty").value;
+    questionAmount = document.getElementById("amount").value;
+
+    fetch(`https://opentdb.com/api.php?amount=${questionAmount}&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=multiple`)
         .then(function(response) {
             return response.json();
         })
         .then(function(data) {
+            console.log(data);
             questionsArray = data.results;
+            if (questionsArray.length === 0) {
+                alert("Couldn't load quiz questions. Please wait a few seconds and try again.");
+                return;
+            }
             showQuestion(questionsArray[0]);
         });
 }
@@ -102,14 +114,30 @@ function nextQuestion() {
     }
 }
 
+
+function goHome() {
+    clearInterval(timer);
+
+    score = 0;
+    currentQuestion= 0;
+    questionsArray = [];
+
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("score-container").style.display = "none";
+    document.getElementById("intro-screen").style.display = "block";
+}
+
 document.getElementById('next-btn').addEventListener('click', function() {
     clearInterval(timer);
     nextQuestion();
 });
 
 console.log(document.getElementById("start-btn"));
+
 document.getElementById('start-btn').addEventListener('click', function () {
     console.log("Start button clicked");
     startQuiz();
 });
 document.getElementById('restart-btn').addEventListener('click', startQuiz);
+document.getElementById("home-btn").addEventListener("click",goHome);
+document.getElementById("score-home-btn").addEventListener("click", goHome);
