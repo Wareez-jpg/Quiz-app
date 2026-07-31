@@ -20,6 +20,9 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 - Home button to return to teh setup screen
 - Animated sky background for desktop and mobile devices
 - Responsive design for desktop and mobile devices
+- Automatic score calculation
+- Performance-based feedback messages
+- Github and email feedback links
 
 ## Features
 ### Multiple quiz subjects
@@ -46,13 +49,12 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 
 
 ## Upcoming Features
-
-- Progress bar
+- Add more quiz statistics
+- Improve animations
 - Sound effects
 - Background music
 - High score saving using Local Storage
 - Achievements and streak tracking
-- Improved progress bar
 - Review answers after completing a quiz
 - Light/Dark mode
 
