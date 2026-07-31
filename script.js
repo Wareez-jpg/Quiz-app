@@ -17,13 +17,22 @@ function startQuiz() {
     score = 0;
     currentQuestion = 0;
 
-    document.getElementById('intro-screen').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
-    document.getElementById('score-container').style.display = 'none';
-
     selectedCategory = document.getElementById("subject").value;
     selectedDifficulty = document.getElementById("difficulty").value;
     questionAmount = document.getElementById("amount").value;
+
+    if (
+        !selectedCategory ||
+        !selectedDifficulty ||
+        !questionAmount
+    ) {
+        alert("Please complete all quiz settings.");
+        return;
+    }
+
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('score-container').style.display = 'none';
 
     fetch(`https://opentdb.com/api.php?amount=${questionAmount}&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=multiple`)
         .then(function(response) {
@@ -49,7 +58,15 @@ function startTimer() {
         timerDisplay.textContent = `${timeLeft}s`;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            nextQuestion();
+            const correct = questionsArray[currentQuestion].correct_answer;
+            const buttons = document.querySelectorAll(".answer-btn");
+            buttons.forEach(function(button) {
+                button.disabled= true;
+                if(button.textContent === correct) {
+                    button.style.backgroundColor = "green";
+                }
+            });
+            document.getElementById("next-btn").disabled = false;
         }
     }, 1000);
 }
@@ -125,6 +142,12 @@ function goHome() {
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("score-container").style.display = "none";
     document.getElementById("intro-screen").style.display = "block";
+
+    document.getElementById("subject").selectedIndex = 0;
+    document.getElementById("difficulty").selectedIndex = 0;
+    document.getElementById("amount").selectedIndex = 0;
+
+    document.getElementById("selected-topic").textContent = "";
 }
 
 document.getElementById('next-btn').addEventListener('click', function() {

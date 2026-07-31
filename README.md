@@ -15,6 +15,29 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 - Next button progresses through questions
 - Difficulty selection
 - Multiple quiz subjects
+- 20 seconds timer for every Question
+- Instant answer validation
+- Home button to return to teh setup screen
+- Animated sky background for desktop and mobile devices
+- Responsive design for desktop and mobile devices
+
+## Features
+### Multiple quiz subjects
+- Science
+- Computer science
+- Mathematics
+- Geography
+- History
+
+### Difficulty selection
+- Easy
+- Medium
+- Hard
+
+### Number of questions
+- 10
+- 20
+- 50
 
 ## Built with
 - HTML, CSS, JavaScript
@@ -29,6 +52,9 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 - Background music
 - High score saving using Local Storage
 - Achievements and streak tracking
+- Improved progress bar
+- Review answers after completing a quiz
+- Light/Dark mode
 
 ## Author
 
