@@ -271,7 +271,8 @@ h1 span{
     min-height: 80vh;
     background: none;
     box-shadow: none;
-    color:rgb(0, 0, 0)
+    color:rgb(0, 0, 0);
+    position: relative;
 }
 
 #score-text {
@@ -313,6 +314,18 @@ h1 span{
 .score-buttons button {
     width: 220px;
     margin: 0;
+}
+
+#score-difficulty {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.2);
+    backdrop-filter: blur(10px);
+    font-size: .9rem;
+    font-weight: bold;
 }
 
 #home-btn {

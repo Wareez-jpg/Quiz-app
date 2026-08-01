@@ -16,6 +16,12 @@ const subjectNames = {
     23: "History",
 };
 
+const difficultyNames = {
+    easy: "Easy",
+    medium: "Medium",
+    hard: "Hard"
+};
+
 const questionNumber = document.getElementById("question-number");
 const timerDisplay = document.getElementById("timer");
 const quizSubject = document.getElementById("quiz-subject");
@@ -23,6 +29,9 @@ const finalScore = document.getElementById("final-score");
 const scoreMessage = document.getElementById("score-message");
 const scoreSubject = document.getElementById("score-subject");
 const scoreEmoji = document.getElementById("score-emoji");
+const scoreDifficulty = document.getElementById("score-difficulty");
+const clickSound = new Audio("sounds/click.mp3");
+const finishSound = new Audio("sounds/finish.mp3");
 
 function startQuiz() {
     console.log("startQuiz running");
@@ -66,6 +75,9 @@ function startQuiz() {
 
 function startTimer() {
     clearInterval(timer);
+
+    timerDisplay.style.visibility = "visible";
+
     timeLeft = 20;
     timerDisplay.textContent = `${timeLeft}s`;
     timer = setInterval(function() {
@@ -73,6 +85,9 @@ function startTimer() {
         timerDisplay.textContent = `${timeLeft}s`;
         if (timeLeft <= 0) {
             clearInterval(timer);
+
+            timerDisplay.style.visibility = "hidden";
+
             const correct = questionsArray[currentQuestion].correct_answer;
             const buttons = document.querySelectorAll(".answer-btn");
             buttons.forEach(function(button) {
@@ -90,7 +105,17 @@ function showQuestion(question) {
     questionNumber.textContent =
         `Question ${currentQuestion + 1} of ${questionsArray.length}`;
 
+        const nextBtn = document.getElementById("next-btn");
+
+        if (currentQuestion === questionsArray.length - 1) {
+            nextBtn.textContent = "Finish Quiz";
+        } else {
+            nextBtn.textContent = "Next";
+        }
+
         document.getElementById("next-btn").disabled = true;
+
+        timerDisplay.style.visibility = "visible";
 
     startTimer();
 
@@ -117,7 +142,11 @@ function showQuestion(question) {
 
     newButtons.forEach(function(button) {
         button.addEventListener('click', function() {
+            console.log("Answer clicked");
+            
             clearInterval(timer);
+            timerDisplay.style.visibility = "hidden";
+            console.log("Timer hidden");
 
             const correct = question.correct_answer;
             newButtons.forEach(function(btn) {
@@ -141,7 +170,17 @@ function nextQuestion() {
     currentQuestion++;
     if (currentQuestion < questionsArray.length) {
         showQuestion(questionsArray[currentQuestion]);
-    } else {
+    } 
+
+    else {
+        finishSound.currentTime = 0;
+        finishSound.play();
+
+        showScore();
+    }
+}
+
+function showScore() {
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('score-container').style.display = 'block';
 
@@ -174,11 +213,14 @@ function nextQuestion() {
             scoreEmoji.textContent = "💪";
             scoreMessage.textContent = "Don't give up! Every expert started somewhere.";
         }
-    }
+
+    scoreDifficulty.textContent =
+        `${difficultyNames[selectedDifficulty]}`;
 }
 
 
 function goHome() {
+    console.log("Home button clicked");
     clearInterval(timer);
 
     score = 0;
@@ -197,6 +239,9 @@ function goHome() {
 }
 
 document.getElementById('next-btn').addEventListener('click', function() {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
     clearInterval(timer);
     nextQuestion();
 });
@@ -204,9 +249,29 @@ document.getElementById('next-btn').addEventListener('click', function() {
 console.log(document.getElementById("start-btn"));
 
 document.getElementById('start-btn').addEventListener('click', function () {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
     console.log("Start button clicked");
     startQuiz();
 });
-document.getElementById('restart-btn').addEventListener('click', startQuiz);
-document.getElementById("home-btn").addEventListener("click",goHome);
-document.getElementById("score-home-btn").addEventListener("click", goHome);
+document.getElementById("restart-btn").addEventListener("click", function () {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    startQuiz();
+});
+
+document.getElementById("home-btn").addEventListener("click", function () {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    goHome();
+});
+console.log(document.getElementById("score-home-btn"));
+document.getElementById("score-home-btn").addEventListener("click", function () {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    goHome();
+});

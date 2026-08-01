@@ -23,6 +23,10 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 - Automatic score calculation
 - Performance-based feedback messages
 - Github and email feedback links
+- Sound effects added
+- Added subject display at score screen
+- Difficulty displayed at score screen
+- Added finish quiz screen at final question
 
 ## Features
 ### Multiple quiz subjects
@@ -51,12 +55,13 @@ Designed with a game-inspired interface, NOVA Quiz combines learning with an eng
 ## Upcoming Features
 - Add more quiz statistics
 - Improve animations
-- Sound effects
 - Background music
 - High score saving using Local Storage
 - Achievements and streak tracking
 - Review answers after completing a quiz
 - Light/Dark mode
+- User profiles
+- AI powered study mode
 
 ## Author
 
