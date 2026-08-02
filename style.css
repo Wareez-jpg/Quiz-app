@@ -191,6 +191,12 @@ h1 span{
     width: 90%
 }
 
+.quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #quiz-subject {
     font-size: 1.4rem;
     font-weight: bold;
@@ -206,7 +212,8 @@ h1 span{
 }
 
 #question-number {
-    font-size: 18px;
+    margin-top: 15px;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 
@@ -376,7 +383,7 @@ footer {
     height: 35px;
 }
 
-@media (max-width:768px) {
+@media (max-width:480px) {
     body {
         overflow-y: auto;
         min-height: auto;
@@ -395,6 +402,14 @@ footer {
 
     .cloud {
         transform: scale(.6);
+    }
+
+    .quiz-top {
+        margin-bottom: 10px;
+    }
+
+    #question-number {
+        text-align: center;
     }
 
     footer {
