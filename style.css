@@ -177,7 +177,7 @@ h1 span{
 #start-btn:hover{
     transform:translateY(-4px) scale(1.05);
     box-shadow:0 10px 25px rgba(43,156,255,.5);
-}
+} 
 
 #quiz-container {
     position: relative;
@@ -195,6 +195,7 @@ h1 span{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 #quiz-subject {
@@ -208,13 +209,16 @@ h1 span{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 #question-number {
-    margin-top: 15px;
-    font-size: 1.1rem;
+    text-align: center;
+    margin: 30px;
     font-weight: bold;
+}
+
+#home-btn {
+    margin-top: 0;
 }
 
 #timer {
