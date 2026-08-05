@@ -26,12 +26,39 @@ const questionNumber = document.getElementById("question-number");
 const timerDisplay = document.getElementById("timer");
 const quizSubject = document.getElementById("quiz-subject");
 const finalScore = document.getElementById("final-score");
+const bestScore = document.getElementById("best-score");
 const scoreMessage = document.getElementById("score-message");
 const scoreSubject = document.getElementById("score-subject");
 const scoreEmoji = document.getElementById("score-emoji");
 const scoreDifficulty = document.getElementById("score-difficulty");
 const clickSound = new Audio("sounds/click.mp3");
 const finishSound = new Audio("sounds/finish.mp3");
+
+function showRecords() {
+    const recordsList = document.getElementById("records-list");
+    const savedRecords = JSON.parse(localStorage.getItem("novaRecords")) || {};
+
+    recordsList.innerHTML = "";
+
+    if (Object.keys(savedRecords).length === 0) {
+        recordsList.textContent = "No records yet. Start a quiz!";
+        return;
+    }
+
+    for (let subject in savedRecords) {
+        const record = savedRecords[subject];
+        const recordCard = document.createElement("div");
+        recordCard.className = "record-item";
+
+        recordCard.innerHTML = `
+            <h3>${subject}</h3>
+            <p>${record.score}/${record.total}</p>
+            <p>${record.difficulty}</p>
+        `;
+
+        recordsList.appendChild(recordCard);
+    }
+}
 
 function startQuiz() {
     console.log("startQuiz running");
@@ -187,6 +214,25 @@ function showScore() {
         scoreSubject.textContent = subjectNames[selectedCategory];
         finalScore.textContent = `${score} / ${questionsArray.length}`;
 
+        const savedRecords = JSON.parse(localStorage.getItem("novaRecords")) || {};
+        const subject = subjectNames[selectedCategory];
+        const existingRecord = savedRecords[subject];
+
+        const newRecord = {
+            score: score,
+            total: questionsArray.length,
+            difficulty: difficultyNames[selectedDifficulty]
+        };
+
+        if (!existingRecord || score > existingRecord.score) {
+            savedRecords[subject] = newRecord;
+ 
+            localStorage.setItem(
+                "novaRecords",
+                JSON.stringify(savedRecords)
+            );
+        }
+
         const percentage = (score / questionsArray.length) * 100;
 
         if (percentage ===100) {
@@ -275,3 +321,12 @@ document.getElementById("score-home-btn").addEventListener("click", function () 
 
     goHome();
 });
+
+document.getElementById("records-btn").addEventListener("click", function() {
+    showRecords();
+    document.getElementById("records-modal").style.display = "flex";
+});
+
+document.getElementById("close-records").addEventListener("click", function() {
+    document.getElementById("records-modal").style.display = "none";
+})

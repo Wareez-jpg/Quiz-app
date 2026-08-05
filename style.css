@@ -205,12 +205,6 @@ h1 span{
     margin-bottom: 20px
 }
 
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 #question-number {
     text-align: center;
     margin: 30px;
@@ -251,7 +245,7 @@ h1 span{
     transition: background-color 0.2s ease;
 }
 
-.answer-btn:hover {
+.answer-btn:not(:disabled):hover {
     background-color: #580618;
 }
 
@@ -270,6 +264,47 @@ h1 span{
 #next-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+#records-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+}
+
+.records-box {
+    background: rgba(20,18,48,.95);
+    color: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#records-list {
+    margin:20px 0;
+}
+
+.record-item {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#close-records {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #e94560;
+    color: white;
+    cursor: pointer;
 }
 
 #score-container {
@@ -409,11 +444,11 @@ footer {
     }
 
     .quiz-top {
-        margin-bottom: 10px;
+        align-items: center;
     }
 
     #question-number {
-        text-align: center;
+        margin-top: 10px;
     }
 
     footer {
